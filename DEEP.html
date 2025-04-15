@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditing/Tax Consultant</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: #fff !important;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #007bff !important;
+        }
+        .hero {
+            background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .hero-logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+            color: #007bff;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #007bff;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        .service-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .contact-info {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .contact-info i {
+            color: #007bff;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        .footer {
+            background: #343a40;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: #0069d9;
+            transform: translateY(-3px);
+        }
+        .modal-content {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .modal-title {
+            font-weight: 700;
+            color: #007bff;
+        }
+        .form-control {
+            border-radius: 50px;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+        }
+        #tax-result {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 1000;
+        }
+        .progress-bar {
+            height: 5px;
+            background: #007bff;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+        .floating-btn:hover {
+            background: #0069d9;
+            transform: translateY(-5px) scale(1.1);
+        }
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            color: white;
+        }
+        
+        /* Collapsible Tax Law Cards */
+        .tax-law-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #007bff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tax-law-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .tax-law-card .card-header h4 {
+            color: #007bff;
+            margin: 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .tax-law-card .card-header .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .tax-law-card.active .card-header .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .tax-law-card .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .tax-law-card.active .card-content {
+            max-height: 2000px;
+            padding: 15px 0;
+        }
+        
+        .tax-law-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .tax-law-card:active {
+            animation: pop 0.4s ease-out;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .tax-law-card.active {
+            border-left: 4px solid #28a745;
+            background-color: #f8fff9;
+        }
+        
+        .tax-law-card.active .card-header h4 {
+            color: #28a745;
+        }
+        
+        .tax-law-highlight {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #28a745;
+        }
+        
+        .tax-law-highlight h5 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        
+        .tax-law-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .tax-law-table th, .tax-law-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .tax-law-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .tax-law-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        /* Fixed Tax Calculator */
+        .fixed-calculator {
+            position: fixed;
+            width: 320px;
+            right: 20px;
+            bottom: 100px;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            display: none;
+        }
+        
+        .calculator-header {
+            background: #007bff;
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calculator-header h5 {
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .calculator-header .close-calc {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .calculator-body {
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section {
+                padding: 60px 0;
+            }
+            .fixed-calculator {
+                width: 280px;
+                right: 10px;
+                bottom: 80px;
+            }
+            .tax-law-card .card-header h4 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-btn" id="floatingBtn">
+        <i class="fas fa-envelope"></i>
+    </div>
+
+    <!-- Fixed Tax Calculator -->
+    <div class="fixed-calculator" id="fixedCalculator">
+        <div class="calculator-header">
+            <h5>Tax Calculator</h5>
+            <button class="close-calc" id="closeCalculator">×</button>
+        </div>
+        <div class="calculator-body">
+            <form id="floating-tax-calculator-form">
+                <div class="form-group mb-3">
+                    <label for="floating-regime" class="mb-1">Tax Regime</label>
+                    <select class="form-control" id="floating-regime" required>
+                        <option value="new">New Regime (Default)</option>
+                        <option value="old">Old Regime</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="floating-age" class="mb-1">Age Group</label>
+                    <select class="form-control" id="floating-age" required>
+                        <option value="below60">Below 60 years</option>
+                        <option value="60to80">60 to 80 years</option>
+                        <option value="above80">Above 80 years</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="floating-income" class="mb-1">Annual Income (₹)</label>
+                    <input type="number" class="form-control" id="floating-income" min="0" required>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="floating-deductions" class="mb-1">Deductions (Old Regime only, ₹)</label>
+                    <input type="number" class="form-control" id="floating-deductions" min="0" value="0">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Calculate Tax</button>
+            </form>
+            <div id="floating-tax-result" class="mt-4 p-3 bg-light rounded" style="display: none;">
+                <h6 class="mb-3">Tax Calculation Result</h6>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Taxable Income:</span>
+                    <span>₹<span id="floating-taxable-income">0</span></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Tax Amount:</span>
+                    <span>₹<span id="floating-tax-amount">0</span></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Cess (4%):</span>
+                    <span>₹<span id="floating-cess-amount">0</span></span>
+                </div>
+                <hr class="my-3">
+                <div class="d-flex justify-content-between font-weight-bold">
+                    <span>Total Tax:</span>
+                    <span>₹<span id="floating-total-tax">0</span></span>
+                </div>
+                <div class="alert alert-info mt-3 mb-0 p-2 small">
+                    <i class="fas fa-info-circle"></i> This is an estimate. Consult a tax professional for accuracy.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Auditing/Tax Consultant</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tax-laws">Tax Laws</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-information">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary ml-lg-2" data-toggle="modal" data-target="#consultation-request-modal">Get Consultation</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="logo01.png" alt="Auditing/Tax Consultant Logo" class="hero-logo animate__animated animate__fadeIn">
+            <h1 class="animate__animated animate__fadeInDown">Expert Tax & Auditing Services</h1>
+            <p class="animate__animated animate__fadeInUp">Our team of certified professionals provides comprehensive auditing and tax consulting services to help individuals and businesses thrive.</p>
+            <div class="animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="#services" class="btn btn-primary mr-2">Our Services</a>
+                <button class="btn btn-outline-light" data-toggle="modal" data-target="#consultation-request-modal">Free Consultation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4 animate__animated animate__fadeInUp">
+                    <div class="service-card">
+                        <i class="fas fa-file-invoice-dollar service-icon"></i>
+                        <h3>Auditing Services</h3>
+                        <p>Comprehensive financial audits to ensure accuracy, compliance, and transparency in your financial reporting.</p>
+                        <button class="btn btn-outline-primary mt-2" data-toggle="modal" data-target="#consultation-request-modal">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="service-card">
+                        <i class="fas fa-calculator service-icon"></i>
+                        <h3>Tax Consulting</h3>
+                        <p>Strategic tax planning and compliance services to minimize liabilities and maximize savings.</p>
+                        <button class="btn btn-outline-primary mt-2" data-toggle="modal" data-target="#consultation-request-modal">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="service-card">
+                        <i class="fas fa-chart-line service-icon"></i>
+                        <h3>Financial Planning</h3>
+                        <p>Personalized financial strategies to help you achieve your short-term and long-term financial goals.</p>
+                        <button class="btn btn-outline-primary mt-2" data-toggle="modal" data-target="#consultation-request-modal">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Indian Tax Laws Section -->
+    <section class="section bg-light" id="tax-laws">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Indian Income Tax Laws & Rules</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tax-law-card" id="tax-slabs-card">
+                        <div class="card-header">
+                            <h4>Income Tax Slabs for FY 2024-25 (AY 2025-26)</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="tax-law-highlight">
+                                <h5>New Tax Regime (Default)</h5>
+                                <table class="tax-law-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Income Range (₹)</th>
+                                            <th>Tax Rate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Up to 3,00,000</td>
+                                            <td>Nil</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3,00,001 - 6,00,000</td>
+                                            <td>5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6,00,001 - 9,00,000</td>
+                                            <td>10%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9,00,001 - 12,00,000</td>
+                                            <td>15%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12,00,001 - 15,00,000</td>
+                                            <td>20%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Above 15,00,000</td>
+                                            <td>30%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p><strong>Note:</strong> Standard deduction of ₹50,000 is available under new regime.</p>
+                            </div>
+
+                            <h5>Old Tax Regime (Optional)</h5>
+                            <table class="tax-law-table">
+                                <thead>
+                                    <tr>
+                                        <th>Income Range (₹)</th>
+                                        <th>Below 60 years</th>
+                                        <th>60-80 years (Senior)</th>
+                                        <th>Above 80 years (Super Senior)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Up to 2,50,000/3,00,000/5,00,000</td>
+                                        <td>Nil</td>
+                                        <td>Nil</td>
+                                        <td>Nil</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2,50,001 - 5,00,000</td>
+                                        <td>5%</td>
+                                        <td>5%</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5,00,001 - 10,00,000</td>
+                                        <td>20%</td>
+                                        <td>20%</td>
+                                        <td>20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above 10,00,000</td>
+                                        <td>30%</td>
+                                        <td>30%</td>
+                                        <td>30%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tax-law-card" id="changes-card">
+                        <div class="card-header">
+                            <h4>Key Changes for FY 2024-25</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>New tax regime is now the default option</strong> - Taxpayers must explicitly opt for old regime</li>
+                                <li><strong>Standard deduction</strong> of ₹50,000 introduced in new tax regime</li>
+                                <li><strong>Tax exemption limit</strong> increased from ₹2.5 lakh to ₹3 lakh under new regime</li>
+                                <li><strong>Leave encashment exemption</strong> increased from ₹3 lakh to ₹25 lakh for non-government employees</li>
+                                <li><strong>LTCG tax exemption</strong> remains at ₹1 lakh for listed equity shares/units</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tax-law-card" id="deductions-card">
+                        <div class="card-header">
+                            <h4>Important Deductions & Exemptions (Old Regime Only)</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="tax-law-highlight">
+                                <h5>Section 80C Deductions (₹1.5 lakh limit)</h5>
+                                <ul>
+                                    <li>Public Provident Fund (PPF)</li>
+                                    <li>Equity Linked Savings Scheme (ELSS)</li>
+                                    <li>Life Insurance Premiums</li>
+                                    <li>Employee Provident Fund (EPF)</li>
+                                    <li>National Savings Certificate (NSC)</li>
+                                    <li>Principal repayment of home loan</li>
+                                    <li>Tuition fees for children</li>
+                                </ul>
+                            </div>
+
+                            <h5>Other Key Deductions</h5>
+                            <ul>
+                                <li><strong>Section 80D:</strong> Health Insurance Premium (₹25,000 for self/family, additional ₹25,000 for parents, ₹50,000 if parents are senior citizens)</li>
+                                <li><strong>Section 80TTA:</strong> Interest on Savings Account (₹10,000 limit)</li>
+                                <li><strong>HRA:</strong> House Rent Allowance exemption based on rent paid</li>
+                                <li><strong>LTA:</strong> Leave Travel Allowance exemption for travel expenses</li>
+                                <li><strong>Section 24:</strong> Interest on home loan up to ₹2 lakh</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary" id="openFloatingCalculator">
+                            <i class="fas fa-calculator"></i> Open Tax Calculator
+                        </button>
+                        <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#indian-tax-laws-modal">
+                            <i class="fas fa-book"></i> View Tax Resources
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="section" id="tools">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Useful Tools</h2>
+            <div class="row">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="service-card">
+                        <i class="fas fa-file-alt service-icon"></i>
+                        <h3>Tax Laws Reference</h3>
+                        <p>Access the latest Indian tax laws and regulations to stay compliant with current legislation.</p>
+                        <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#indian-tax-laws-modal">View Tax Laws</button>
+                    </div>
+                </div>
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="service-card">
+                        <i class="fas fa-calculator service-icon"></i>
+                        <h3>Tax Calculator</h3>
+                        <p>Estimate your income tax liability according to the latest Indian tax slabs and regulations.</p>
+                        <button class="btn btn-primary mt-2" id="openCalculatorBtn">Calculate Tax</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section bg-light" id="contact-information">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Contact Us</h2>
+            <div class="row">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <div class="contact-info">
+                        <h4>Get in Touch</h4>
+                        <p class="mb-4">Have questions or need professional advice? Reach out to our team for expert guidance.</p>
+                        
+                        <div class="mb-3">
+                            <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps/dir//Back+of+old+gramina+bank,+near+Anand+electricals+and+hardware+shop,+Hagaribommanahalli,+Karnataka+583212/@15.046914,76.2061174,764m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bb9c3007c340db9:0x7d085dd842cf6478!2m2!1d76.2086912!2d15.0469316?entry=ttu&g_ep=EgoyMDI1MDMyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">Back of Old Gramina Bank, Near Anand Electricals and Hardware Shop, Hagaribommanahalli, Karnataka 583212, India</a></p>
+                        </div>
+                        <div class="mb-3">
+                            <p><i class="fas fa-phone"></i> +91 94496 22875</p>
+                        </div>
+                        <div class="mb-3">
+                            <p><i class="fab fa-whatsapp whatsapp-btn"></i> <a href="https://wa.me/919449622875" target="_blank">+91 94496 22875</a></p>
+                        </div>
+                        <div class="mb-3">
+                            <p><i class="fas fa-envelope"></i> <a href="mailto:contact@amruthunjaya.com">contact@amruthunjaya.com</a></p>
+                        </div>
+                        
+                        <div class="social-links mt-4">
+                            <a href="https://www.instagram.com/auditor_amj?igsh=MXQ1NmVrbmkzczFi" target="_blank" class="btn btn-outline-primary mr-2"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.facebook.com/" target="_blank" class="btn btn-outline-primary"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="contact-info">
+                        <h4>Send Us a Message</h4>
+                        <form id="contactForm" action="https://formspree.io/f/mqapdbyp" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" name="phone" placeholder="Your Phone">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="subject" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="Auditing">Auditing Services</option>
+                                    <option value="Tax">Tax Consultation</option>
+                                    <option value="Financial">Financial Planning</option>
+                                    <option value="Other">Other Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" rows="4" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Auditing/Tax Consultant</h5>
+                    <p>Providing expert financial services since 2010. Helping businesses and individuals navigate complex financial landscapes.</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#tax-laws">Tax Laws</a></li>
+                        <li><a href="#contact-information">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" data-toggle="modal" data-target="#privacyModal">Privacy Policy</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#termsModal">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="background-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left">
+                    <p class="mb-0">© 2025 Auditing/Tax Consultant. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> for our clients</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Consultation Request Modal -->
+    <div class="modal fade" id="consultation-request-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request a Consultation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="consultationForm" action="https://formspree.io/f/mqapdbyp" method="POST">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Needed</label>
+                            <select class="form-control" name="service" required>
+                                <option value="">Select Service</option>
+                                <option value="Audit">Auditing Services</option>
+                                <option value="Tax">Tax Consultation</option>
+                                <option value="Financial">Financial Planning</option>
+                                <option value="Other">Other Service</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Brief Description of Your Needs</label>
+                            <textarea class="form-control" name="message" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indian Tax Laws Modal -->
+    <div class="modal fade" id="indian-tax-laws-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Indian Income Tax Laws & Resources</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle mr-2"></i> These resources will open in a new tab for your convenience.
+                    </div>
+                    <div class="list-group">
+                        <a href="https://incometaxindia.gov.in" target="_blank" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Income Tax India Official Website</h6>
+                                <small><i class="fas fa-external-link-alt"></i></small>
+                            </div>
+                            <p class="mb-1">The official portal of the Income Tax Department, Government of India.</p>
+                        </a>
+                        <a href="https://incometaxindia.gov.in/Pages/acts/income-tax-act.aspx" target="_blank" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Income Tax Act, 1961</h6>
+                                <small><i class="fas fa-external-link-alt"></i></small>
+                            </div>
+                            <p class="mb-1">Complete text of the Income Tax Act with all amendments.</p>
+                        </a>
+                        <a href="https://incometaxindia.gov.in/Pages/tax-laws-rules.aspx" target="_blank" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Tax Laws & Rules</h6>
+                                <small><i class="fas fa-external-link-alt"></i></small>
+                            </div>
+                            <p class="mb-1">All relevant tax laws, rules, and notifications.</p>
+                        </a>
+                        <a href="https://incometaxindia.gov.in/Pages/utilities/income-tax-calculator.aspx" target="_blank" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Official Tax Calculator</h6>
+                                <small><i class="fas fa-external-link-alt"></i></small>
+                            </div>
+                            <p class="mb-1">Government's official income tax calculator tool.</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tax Calculator Modal -->
+    <div class="modal fade" id="tax-calculator-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Income Tax Calculator (India)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="tax-calculator-form">
+                        <div class="form-group">
+                            <label for="financialYear">Financial Year:</label>
+                            <select class="form-control" id="financialYear" required>
+                                <option value="2024-25">2024-25</option>
+                                <option value="2023-24">2023-24</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="regime">Tax Regime:</label>
+                            <select class="form-control" id="regime" required>
+                                <option value="new">New Regime (Default)</option>
+                                <option value="old">Old Regime</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age Group:</label>
+                            <select class="form-control" id="age" required>
+                                <option value="below60">Below 60 years</option>
+                                <option value="60to80">60 to 80 years</option>
+                                <option value="above80">Above 80 years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="income">Annual Income (₹):</label>
+                            <input type="number" class="form-control" id="income" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="deductions">Deductions (Old Regime only, ₹):</label>
+                            <input type="number" class="form-control" id="deductions" min="0" value="0">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Calculate Tax</button>
+                    </form>
+                    <div id="tax-result" class="mt-4 p-3 bg-light rounded" style="display: none;">
+                        <h6>Tax Calculation Result:</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="mb-1">Taxable Income:</p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p class="mb-1">₹<span id="taxable-income">0</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="mb-1">Tax Amount:</p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p class="mb-1">₹<span id="tax-amount">0</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="mb-1">Cess (4%):</p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p class="mb-1">₹<span id="cess-amount">0</span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row font-weight-bold">
+                            <div class="col-6">
+                                <p class="mb-0">Total Tax:</p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p class="mb-0">₹<span id="total-tax">0</span></p>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3 mb-0 p-2 small">
+                            <i class="fas fa-info-circle mr-1"></i> This is an estimate. For accurate calculation, please consult a tax professional.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Privacy Policy</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Information We Collect</h6>
+                    <p>We collect personal information that you voluntarily provide to us when you register on the website, express an interest in obtaining information about us or our products and services, or otherwise when you contact us.</p>
+                    
+                    <h6>2. How We Use Your Information</h6>
+                    <p>We use personal information collected via our website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.</p>
+                    
+                    <h6>3. Sharing Your Information</h6>
+                    <p>We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.</p>
+                    
+                    <h6>4. Data Security</h6>
+                    <p>We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">I Understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Terms of Service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Acceptance of Terms</h6>
+                    <p>By accessing or using our website and services, you agree to be bound by these Terms of Service and our Privacy Policy.</p>
+                    
+                    <h6>2. Services Provided</h6>
+                    <p>We provide auditing, tax consulting, and financial planning services as described on our website. All information provided is for general informational purposes only.</p>
+                    
+                    <h6>3. Professional Advice</h6>
+                    <p>The content on our website does not constitute professional advice. For specific advice related to your situation, please consult with one of our professionals.</p>
+                    
+                    <h6>4. Limitation of Liability</h6>
+                    <p>We shall not be liable for any indirect, incidental, special, consequential or punitive damages resulting from your access to or use of our services.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+                    </div>
+                    <h4 class="mb-3">Thank You!</h4>
+                    <p id="successMessage">Your request has been submitted successfully. We will contact you shortly.</p>
+                    <button type="button" class="btn btn-primary mt-3" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth scrolling for anchor links
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top - 70,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+            
+            // Navbar background change on scroll
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('navbar-scrolled');
+                } else {
+                    $('.navbar').removeClass('navbar-scrolled');
+                }
+            });
+            
+            // Back to top button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#backToTop').addClass('active');
+                } else {
+                    $('#backToTop').removeClass('active');
+                }
+            });
+            
+            $('#backToTop').click(function() {
+                $('html, body').animate({scrollTop: 0}, 'smooth');
+                return false;
+            });
+            
+            // Floating button click handler
+            $('#floatingBtn').click(function() {
+                $('#consultation-request-modal').modal('show');
+            });
+            
+            // Progress bar
+            $(window).scroll(function() {
+                var scroll = $(window).scrollTop();
+                var docHeight = $(document).height();
+                var winHeight = $(window).height();
+                var scrollPercent = (scroll / (docHeight - winHeight)) * 100;
+                $('#progressBar').width(scrollPercent + '%');
+            });
+            
+            // Animation on scroll
+            function animateOnScroll() {
+                $('.animate__animated').each(function() {
+                    var position = $(this).offset().top;
+                    var scroll = $(window).scrollTop();
+                    var windowHeight = $(window).height();
+                    
+                    if (scroll + windowHeight > position) {
+                        var animationClass = $(this).attr('class').split('animate__animated ')[1].split(' ')[0];
+                        $(this).addClass(animationClass);
+                    }
+                });
+            }
+            
+            // Run once on page load
+            animateOnScroll();
+            
+            // Run on scroll
+            $(window).scroll(function() {
+                animateOnScroll();
+            });
+            
+            // Form submission handlers
+            $('#consultationForm').submit(function(e) {
+                e.preventDefault();
+                $('#successMessage').text('Your consultation request has been submitted successfully. We will contact you shortly.');
+                $('#consultation-request-modal').modal('hide');
+                $('#successModal').modal('show');
+                this.submit();
+            });
+            
+            $('#contactForm').submit(function(e) {
+                e.preventDefault();
+                $('#successMessage').text('Your message has been sent successfully. We will get back to you soon.');
+                $('#successModal').modal('show');
+                this.submit();
+            });
+            
+            // Income Tax Calculator logic (New and Old Regime as of 2024-25)
+            function calculateTax(regime, age, income, deductions) {
+                let taxableIncome = income;
+                let tax = 0;
+                
+                if (regime === 'old') {
+                    taxableIncome = Math.max(0, income - deductions);
+                    
+                    // Tax slabs based on age (Old Regime as per Indian laws for 2024-25)
+                    if (age === "below60") {
+                        if (taxableIncome <= 250000) tax = 0;
+                        else if (taxableIncome <= 500000) tax = (taxableIncome - 250000) * 0.05;
+                        else if (taxableIncome <= 1000000) tax = 12500 + (taxableIncome - 500000) * 0.20;
+                        else tax = 112500 + (taxableIncome - 1000000) * 0.30;
+                    } else if (age === "60to80") {
+                        if (taxableIncome <= 300000) tax = 0;
+                        else if (taxableIncome <= 500000) tax = (taxableIncome - 300000) * 0.05;
+                        else if (taxableIncome <= 1000000) tax = 10000 + (taxableIncome - 500000) * 0.20;
+                        else tax = 110000 + (taxableIncome - 1000000) * 0.30;
+                    } else { // above80
+                        if (taxableIncome <= 500000) tax = 0;
+                        else if (taxableIncome <= 1000000) tax = (taxableIncome - 500000) * 0.20;
+                        else tax = 100000 + (taxableIncome - 1000000) * 0.30;
+                    }
+                } else {
+                    // New tax regime (default for 2024-25)
+                    taxableIncome = Math.max(0, income - 50000); // Standard deduction in new regime
+                    
+                    if (taxableIncome <= 300000) tax = 0;
+                    else if (taxableIncome <= 600000) tax = (taxableIncome - 300000) * 0.05;
+                    else if (taxableIncome <= 900000) tax = 15000 + (taxableIncome - 600000) * 0.10;
+                    else if (taxableIncome <= 1200000) tax = 45000 + (taxableIncome - 900000) * 0.15;
+                    else if (taxableIncome <= 1500000) tax = 90000 + (taxableIncome - 1200000) * 0.20;
+                    else tax = 150000 + (taxableIncome - 1500000) * 0.30;
+                }
+                
+                // Calculate Health and Education Cess (4%)
+                const cess = tax * 0.04;
+                const totalTax = tax + cess;
+                
+                return {
+                    taxableIncome: taxableIncome.toFixed(2),
+                    tax: tax.toFixed(2),
+                    cess: cess.toFixed(2),
+                    totalTax: totalTax.toFixed(2)
+                };
+            }
+            
+            $('#tax-calculator-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                const financialYear = $('#financialYear').val();
+                const regime = $('#regime').val();
+                const age = $('#age').val();
+                const income = parseFloat($('#income').val());
+                const deductions = parseFloat($('#deductions').val()) || 0;
+                
+                const result = calculateTax(regime, age, income, deductions);
+                
+                // Display results
+                $('#taxable-income').text(result.taxableIncome);
+                $('#tax-amount').text(result.tax);
+                $('#cess-amount').text(result.cess);
+                $('#total-tax').text(result.totalTax);
+                $('#tax-result').show();
+            });
+            
+            // Floating calculator form submission
+            $('#floating-tax-calculator-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                const regime = $('#floating-regime').val();
+                const age = $('#floating-age').val();
+                const income = parseFloat($('#floating-income').val());
+                const deductions = parseFloat($('#floating-deductions').val()) || 0;
+                
+                const result = calculateTax(regime, age, income, deductions);
+                
+                // Display results
+                $('#floating-taxable-income').text(result.taxableIncome);
+                $('#floating-tax-amount').text(result.tax);
+                $('#floating-cess-amount').text(result.cess);
+                $('#floating-total-tax').text(result.totalTax);
+                $('#floating-tax-result').show();
+            });
+            
+            // Toggle deductions field based on regime
+            $('#regime').change(function() {
+                if ($(this).val() === 'old') {
+                    $('#deductions').prop('disabled', false);
+                } else {
+                    $('#deductions').prop('disabled', true).val('0');
+                }
+            });
+            
+            $('#floating-regime').change(function() {
+                if ($(this).val() === 'old') {
+                    $('#floating-deductions').prop('disabled', false);
+                } else {
+                    $('#floating-deductions').prop('disabled', true).val('0');
+                }
+            });
+            
+            // Initialize deductions field
+            $('#deductions').prop('disabled', true);
+            $('#floating-deductions').prop('disabled', true);
+            
+            // Calculator handlers
+            $('#openCalculatorBtn, #openFloatingCalculator').click(function() {
+                $('#fixedCalculator').show();
+            });
+            
+            $('#closeCalculator').click(function() {
+                $('#fixedCalculator').hide();
+            });
+            
+            // Close calculator when clicking outside
+            $(document).mouseup(function(e) {
+                var container = $("#fixedCalculator");
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    container.hide();
+                }
+            });
+            
+            // Close calculator with Escape key
+            $(document).keyup(function(e) {
+                if (e.key === "Escape") {
+                    $('#fixedCalculator').hide();
+                }
+            });
+            
+            // Collapsible tax law cards
+            $('.tax-law-card .card-header').click(function() {
+                const card = $(this).closest('.tax-law-card');
+                const isActive = card.hasClass('active');
+                
+                // Close all cards first
+                $('.tax-law-card').removeClass('active');
+                
+                // If this card wasn't active, open it
+                if (!isActive) {
+                    card.addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
